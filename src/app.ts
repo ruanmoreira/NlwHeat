@@ -1,7 +1,11 @@
 import express from "express";
 import "dotenv/config"
+import { router } from "./routes";
 
 const app = express();
+app.use(express.json()); // para o express passe a aceitar post como .json
+app.use(router);
+
 app.get ("/github", (request, response) => {
     response.redirect (
         `https://github.com/login/oauth/authorize?client_id=${process.env
@@ -14,4 +18,4 @@ app.get("/signin/callback", (request, response) => {
 
     return response.json(code);
 })
-app.listen (4000, () => console.log ('Serven is running on port 4000'));
+app.listen (4000, () => console.log ('Server is running on port 4000'));
